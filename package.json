@@ -1,8 +1,8 @@
 {
-  "name": "virtual_restaurant",
+  "name": "sequelized_virtual_restaurant_food_logger",
   "version": "1.0.0",
   "private": true,
-  "description": "A virtual restaurant food order logger app using MySQL, Node, Express, Handlebars and own ORM.",
+  "description": "A virtual restaurant food order logger app using MySQL, Node, Express, Handlebars and Sequelized ORM.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,18 +10,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maelihector/virtual_restaurant.git"
+    "url": "git+https://github.com/maelihector/Sequelized-Virtual_Restaurant_Food_Logger.git"
   },
   "author": "Maeli Hector",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/maelihector/virtual_restaurant/issues"
+    "url": "https://github.com/maelihector/Sequelized-Virtual_Restaurant_Food_Logger/issues"
   },
-  "homepage": "https://github.com/maelihector/virtual_restaurant#readme",
+  "homepage": "https://github.com/maelihector/Sequelized-Virtual_Restaurant_Food_Logger#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
-    "mysql": "^2.17.1"
+    "mysql2": "^1.7.0",
+    "sequelize": "^5.17.1"
   }
 }
