@@ -29,11 +29,16 @@ app.set("view engine", "handlebars");
 
 
 // Import routes and give the server access to them.
-const routes = require("./controllers/controllers.js");
-app.use(routes);
+require("./routes/api-routes")(app);
+require("./routes/html-routes")(app);
 
-// Start our server
-app.listen(PORT, function() {
-  // Log (server-side) when the server has started
-  console.log("Server listening on: http://localhost:" + PORT);
+// Require models for syncing
+const db = require("./models");
+
+// Sync the sequelize model and then start the Express app
+db.sequelize.sync().then(function(){
+  app.listen(PORT, function() {
+    // Log (server-side) when the server has started
+    console.log("Server listening on: http://localhost:" + PORT);
+  });
 });
