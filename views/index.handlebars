@@ -20,7 +20,7 @@
       <h2>Your Order is Ready!</h2>
       <ul>
         {{#each orders}}
-          {{#unless devoured}}
+          {{#unless dataValues.devoured}}
             {{> orders/order-block devoured=true}}
           {{/unless}}
         {{/each}}
@@ -32,12 +32,12 @@
 
       <ul>
         {{#each orders}}
-          {{#if paid}}
+          {{#if dataValues.paid}}
             <li class="paid">
               <h4>
-                {{order_name}}
+                {{dataValues.order_name}}
               </h4>
-              <button data-id="{{id}}" disabled>
+              <button data-id="{{dataValues.id}}" disabled>
                 PAID
               </button>
             </li>
