@@ -29,15 +29,17 @@ app.set("view engine", "handlebars");
 
 
 // Import routes and give the server access to them.
-require("./routes/api-routes")(app);
-require("./routes/html-routes")(app);
+require("./routes/api/order-api-routes")(app);
+require("./routes/api/customer-api-routes")(app);
+require("./routes/api/table-api-routes")(app);
+require("./routes/html/html-routes")(app);
 
 // Require models for syncing
 const db = require("./models");
 
 // Sync the sequelize model and then start the Express app
-db.sequelize.sync().then(function(){
-  app.listen(PORT, function() {
+db.sequelize.sync({ force: true }).then(function () {
+  app.listen(PORT, function () {
     // Log (server-side) when the server has started
     console.log("Server listening on: http://localhost:" + PORT);
   });

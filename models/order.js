@@ -14,5 +14,17 @@ module.exports = function (sequelize, DataTypes) {
       defaultValue: false
     }
   });
+
+  // Associate each Order with a Customer
+  Order.associate = function (models) {
+
+    Order.belongsTo(models.Customer, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+
+  };
+
   return Order;
 };
