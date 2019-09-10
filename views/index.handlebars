@@ -3,12 +3,45 @@
 
 <main>
   
-  <div class="order">
+  <div class="order-form">
     <h2>Enter Order Here</h2>
     <form class="create-form">
       <div class="form-group">
+
+        {{!-- Input new order  --}}
         <label for="new-order">Order Name:</label>
-        <input type="text" id="new-order" name="order-name">
+        <input placeholder="order name" type="text" id="new-order" name="order-name" />
+
+        <div class="new-customer-form">
+          {{!-- Input new customer name --}}
+          <label for="customer-name">Customer Name:</label>
+          <input placeholder="new customer" type="text" id="customer-name" name="customer-name" />
+          {{!-- Existing customer checkbox --}}
+          <input type="checkbox" name="existing-customer-box" value="existing" />
+          <label for="existing-customer-box">Already a Customer?</label>
+        </div>
+
+        <div class="existing-customer-form">
+          {{!-- Pick existing customer from dropdown --}}
+          <label for="existing-customer">Select Customer:</label>
+          <select id="existing-customer" name="existing-customer"></select>
+          {{!-- New customer checkbox --}}
+          <input type="checkbox" name="new-customer-box" value="new" />
+          <label for="new-customer-box">New Customer?</label>
+        </div>
+
+        {{!-- Select a table  --}}
+        <div id="table-select-div">
+          <label for="table-select">Choose a Table:</label>
+          <select id="table-select">
+            <option value="" name="table-select">Choose</option>
+            <option value="1">Table 1</option>
+            <option value="2">Table 2</option>
+            <option value="3">Table 3</option>
+            <option value="4">Table 4</option>
+          </select>
+        </div>
+
       </div>
       <button type="submit">SUBMIT ORDER</button>
     </form>
@@ -16,38 +49,11 @@
 
   <div class="display">
 
-    <div>
-      <h2>Your Order is Ready!</h2>
-      <ul>
-        {{#each orders}}
-          {{#unless dataValues.devoured}}
-            {{> orders/order-block devoured=true}}
-          {{/unless}}
-        {{/each}}
-      </ul>
-    </div>
+    {{#each tables}}
 
-    <div>
-      <h2>Thank You, Come Again!</h2>
+      {{> tables/table-block}}
 
-      <ul>
-        {{#each orders}}
-          {{#if dataValues.paid}}
-            <li class="paid">
-              <h4>
-                {{dataValues.order_name}}
-              </h4>
-              <button data-id="{{dataValues.id}}" disabled>
-                PAID
-              </button>
-            </li>
-            {{else if devoured}}
-              {{> orders/paid-order-block paid=true}}
-          {{/if}}
-        {{/each}}
-      </ul>
-
-    </div>
+    {{/each}}
 
   </div>
 
