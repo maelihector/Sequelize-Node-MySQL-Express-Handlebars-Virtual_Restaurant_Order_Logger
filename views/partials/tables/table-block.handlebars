@@ -1,0 +1,37 @@
+<div>
+
+  {{!-- Table # --}}
+  <h2>Table {{dataValues.id}}</h2>
+
+  {{#each Customers}}
+  
+    {{dataValues.name}}
+
+    <ul>
+
+      {{#each Orders}}
+
+        {{#unless dataValues.devoured}}
+          {{> orders/order-block devoured=true}}
+        {{/unless}}
+
+        {{#if dataValues.paid}}
+          <li class="paid">
+            <h4>
+              {{dataValues.order_name}}
+            </h4>
+            <button data-id="{{dataValues.id}}" disabled>
+              PAID
+            </button>
+          </li>
+        {{else if devoured}}
+          {{> orders/paid-order-block paid=true}}
+        {{/if}}
+
+    {{/each}}
+
+    </ul>
+
+  {{/each}}
+
+</div>
