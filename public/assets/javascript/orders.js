@@ -147,7 +147,6 @@ $(document).ready(function () {
       data: newPaidState
     }).then(
       function () {
-        console.log("changed paid to", paid);
         // Reload the page to get the updated list
         location.reload();
       }
