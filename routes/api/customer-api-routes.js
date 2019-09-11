@@ -5,9 +5,10 @@ const db = require("../../models");
 // Customer routes
 module.exports = function (app) {
 
+  // Get all customers including their orders array
   app.get("/api/customers", function (req, res) {
     db.Customer.findAll({
-      include: [db.Order, db.Table]
+      include: [db.Order]
     }).then(results => res.json(results))
     .catch(err => res.json(err))
   });
@@ -17,7 +18,8 @@ module.exports = function (app) {
     db.Customer.findOne({
         where: {
           id: req.params.id
-        }
+        },
+        include: [{ all: true, nested: true }]
       }).then(results => res.json(results))
       .catch(err => res.json(err))
   });
