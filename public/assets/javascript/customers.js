@@ -42,11 +42,12 @@ $(document).ready(function () {
   }
 
 
+  // Filter duplicate customer ids from both arrays (duplicates are present because each customer can have several orders)
   function filterCustomers() {
 
-    // Filter duplicate customer ids from both arrays (duplicates are present because each customer can have several orders)
     let uniquePaidCustomers = paidCustomers.filter((item, i, array) => array.indexOf(item) === i);
     let uniqueUnpaidCustomers = unpaidCustomers.filter((item, i, array) => array.indexOf(item) === i);
+
     // Get array of customers where  only ALL orders are paid for (not if customer also has an unpaid order)
     let allPaidCustomers = ($(uniquePaidCustomers).not(uniqueUnpaidCustomers).get());
 
@@ -72,39 +73,33 @@ $(document).ready(function () {
     }
   }
 
-  // Call function to render customers to DOM on page load
-  getCustomers();
-
-
-
-
+  // Function that adds an event listener to the delete buttons created at filterCustomers()
   function addDeleteBtns() {
-
+    // Grab all buttons needed
     const buttons = document.querySelectorAll("#leftTable");
-
+    // Attach event listener to each button
     for (const button of buttons) {
       button.addEventListener('click', updateDatabase);
     }
-
   }
 
-
+  // Function that is called when a click event on a delete button is triggered
   function updateDatabase() {
 
-    console.log($(this));
-    console.log($(this)[0].parentElement.parentElement);
-
+    // Grab customer id, and customer div from DOM
     let customerToUpdate = $(this)[0].previousElementSibling.attributes[0].value;
-    console.log(customerToUpdate);
     let divToRemove = $(this)[0].parentElement.parentElement;
+
+    // Remove customer div from DOM
     $(divToRemove).remove();
 
+    // Send upated call to api
     $.ajax("/api/customers/" + customerToUpdate, {
       type: "PUT"
     }).then(() => location.reload())
-
   }
 
-
+  // Call function to render customers to DOM on page load
+  getCustomers();
 
 });
