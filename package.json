@@ -1,6 +1,6 @@
 {
   "name": "sequelized_virtual_restaurant_food_logger",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "description": "A virtual restaurant food order logger app using MySQL, Node, Express, Handlebars and Sequelized ORM.",
   "main": "index.js",
