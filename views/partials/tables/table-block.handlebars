@@ -5,35 +5,44 @@
 
   {{#each Customers}}
 
-    <h3 customerId="{{dataValues.id}}">
-      {{dataValues.name}}
-    </h3>
+    {{#unless dataValues.leftTable}}
 
-    <ul>
+      <div>
 
-      {{#each Orders}}
+        <div class="customer-name">
+          <h3 customerId="{{dataValues.id}}">
+            {{dataValues.name}}
+          </h3>
+        </div>
 
-        {{#unless dataValues.devoured}}
-          {{> orders/order-block devoured=true}}
-        {{/unless}}
+        <ul>
 
-        {{#if dataValues.paid}}
-          <li class="paid">
-            <h4>
-              {{dataValues.order_name}}
-            </h4>
-            <button data-id="{{dataValues.id}}" disabled>
-              PAID
-            </button>
-          </li>
-        {{else if devoured}}
-          {{> orders/paid-order-block paid=true}}
-        {{/if}}
+          {{#each Orders}}
 
-    {{/each}}
+            {{#unless dataValues.devoured}}
+              {{> orders/order-block devoured=true}}
+            {{/unless}}
 
-    </ul>
+            {{#if dataValues.paid}}
+              <li class="paid">
+                <h4>
+                  {{dataValues.order_name}}
+                </h4>
+                <button data-id="{{dataValues.id}}" disabled>
+                  PAID
+                </button>
+              </li>
+            {{else if devoured}}
+              {{> orders/paid-order-block paid=true}}
+            {{/if}}
 
+        {{/each}}
+
+        </ul>
+
+      </div>
+
+    {{/unless}}
   {{/each}}
 
 </div>
