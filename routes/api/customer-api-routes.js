@@ -34,9 +34,11 @@ module.exports = function (app) {
       .catch(err => res.json(err))
   });
 
-  // Delete a customer based on id
-  app.delete("/api/customers/:id", function (req, res) {
-    db.Customer.destroy({
+  // Update leftTable to true for customer based on id
+  app.put("/api/customers/:id", function (req, res) {
+    db.Customer.update({
+      leftTable: 1,
+    },{
         where: {
           id: req.params.id
         }
