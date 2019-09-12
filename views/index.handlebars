@@ -24,7 +24,16 @@
         <div class="existing-customer-form">
           {{!-- Pick existing customer from dropdown --}}
           <label for="existing-customer">Select Customer:</label>
-          <select id="existing-customer" name="existing-customer"></select>
+          <select id="existing-customer" name="existing-customer">
+            <option value='' table=''>Select Customer</option>
+            {{#each tables}}
+              {{#each Customers}}
+                {{#unless dataValues.leftTable}}
+                  <option value={{dataValues.id}} table={{dataValues.TableId}}>{{dataValues.name}}</option>
+                {{/unless}}
+              {{/each}}
+            {{/each}}
+          </select>
           {{!-- New customer checkbox --}}
           <input type="checkbox" name="new-customer-box" value="new" />
           <label for="new-customer-box">New Customer?</label>
@@ -47,13 +56,28 @@
     </form>
   </div>
 
-  <div class="display">
+  <div class="area">
 
-    {{#each tables}}
+    <div class="display">
 
-      {{> tables/table-block}}
+      {{#each tables}}
+        {{> tables/table-block}}
+      {{/each}}
 
-    {{/each}}
+    </div>
+
+    <div>
+      <h2>Previous Guests</h2>
+      <ul>
+        {{#each tables}}
+          {{#each Customers}}
+            {{#if dataValues.leftTable}}
+              <li>{{dataValues.name}}</li>
+            {{/if}}
+          {{/each}}
+        {{/each}}
+      </ul>
+    </div>
 
   </div>
 
