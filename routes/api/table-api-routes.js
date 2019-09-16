@@ -24,4 +24,11 @@ module.exports = function (app) {
       .catch(err => res.json(err))
   });
 
+  // Add a table
+  app.post("/api/tables", function(req, res){
+    db.Table.create(req.body)
+    .then(results => res.json(results))
+    .catch(err => res.json(err))
+  });
+
 };
