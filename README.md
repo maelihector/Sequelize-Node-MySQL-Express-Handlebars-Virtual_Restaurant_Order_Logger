@@ -70,9 +70,9 @@ But to do this, the api `GET` call must include all nested associations:
 ```
 
 app.get("/api/tables", function (req, res) {
-	db.Table.findAll({
-		include: [{ all: true, nested: true }]
-	})
+  db.Table.findAll({
+    include: [{ all: true, nested: true }]
+  })
 });
 
 ```
