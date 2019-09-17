@@ -29,16 +29,16 @@ Customers can also leave their table (only when all of their orders have been pa
 
 // In Customer Model
 Customer.associate = function (models) {
-	Customer.belongsTo(models.Table, {
-		foreignKey: {
-			allowNull: false
-		}
-	});
+  Customer.belongsTo(models.Table, {
+    foreignKey: {
+      allowNull: false
+    }
+  });
 };
 
 // In Table Model
 Table.associate = function(models){
-	Table.hasMany(models.Customer);
+  Table.hasMany(models.Customer);
 };
 
 ```
@@ -49,16 +49,16 @@ Table.associate = function(models){
 
 // In Order Model
 Order.associate = function (models) {
-	Order.belongsTo(models.Customer, {
-		foreignKey: {
-			allowNull: false
-		}
-	});
+  Order.belongsTo(models.Customer, {
+    foreignKey: {
+      allowNull: false
+    }
+  });
 };
 
 // In Customer Model
 Customer.associate = function (models) {
-	Customer.hasMany(models.Order);
+  Customer.hasMany(models.Order);
 };
 
 ```
