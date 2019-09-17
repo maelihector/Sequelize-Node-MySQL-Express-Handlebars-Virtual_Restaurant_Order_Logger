@@ -1,55 +1,158 @@
-# Node-MySQL-Express-Handlebars-ORM(own)-Virtual_Restaurant_Order_Logger
+
+
+
+# Sequelized Virtual Restaurant Food Logger
+
 
 ## What is this?
 
-Virtual Restaurant Order Logger is a restaurant application that lets users input names of foods they want to order. Also, once ordered, users can 'pay' for their order with a click of a button.
+
+[Sequelized Virtual Restaurant Order Logger](https://peaceful-fjord-07006.herokuapp.com/) app is...you guessed it, a **[Sequelize](https://sequelize.org/master/)** version of the [Homemade ORM Virtual Restaurant Order Logger](https://github.com/maelihector/Node-MySQL-Express-Handlebars-homemadeORM-App-A_Virtual_Restaurant_Order_Logger) app.
+
+The app is essentially a virtual restaurant where users can order any food imaginable, and sit at a table by themselves or with friends to enjoy the food.
+
+The app keeps track of where each customer is sitting, what they have ordered, and whether each order is eaten and/or paid for.
+
+Customers can also leave their table (only when all of their orders have been paid for) to be placed on the restaurant's 'Previous Guests' list.
+
 
 ## How does it work?
 
-[Virtual Restaurant Order Logger](https://fast-refuge-82138.herokuapp.com/) web application was built using the [Node](https://nodejs.org/en/) JavaScript runtime environment with several third-party node packages.
 
-- [Express](https://www.npmjs.com/package/express) web API framework was used to create a web server to handle the app's API and HTTP requests.
+[Sequelized Virtual Restaurant Order Logger](https://peaceful-fjord-07006.herokuapp.com/) takes advantage of [Sequelize](https://sequelize.org/master/)'s many features, including eager loading and associations support, and has the following:
 
-- [Express-handlebars](https://www.npmjs.com/package/express-handlebars) was used in order to use [Handlebars](https://handlebarsjs.com/) as the app's templating engine, which is configured and set as the app's **view engine** using the [express](https://www.npmjs.com/package/express) web API .
 
-- [mySQL](https://www.npmjs.com/package/mysql) is used to create and make a connection to the [mySQL](https://www.mysql.com/) database.
+- The Table model has a One-To-Many association with the Customer model.
 
-- [Body-parser](https://www.npmjs.com/package/body-parser) is used for parsing x-www-form-urlencoded and json.
 
-## What does it do?
+```
 
-To query the app's [mySQL](https://www.mysql.com/) database, the app uses an **ORM object** with several methods that create instances that reference certain parts of the app's database using javaScript. These methods are used by the **models**, which create functions that will interact with the database *after* a query has resolved. The models are in turn used by the **controllers**, which set up logic within the API routes.
+// In Customer Model
+Customer.associate = function (models) {
+	Customer.belongsTo(models.Table, {
+		foreignKey: {
+			allowNull: false
+		}
+	});
+};
 
-The GET HTTP request all of the orders in the app's database be rendered to handlebars as an object with the key-value pair of `orders: data`. 
+// In Table Model
+Table.associate = function(models){
+	Table.hasMany(models.Customer);
+};
 
-Once the response object mentioned above is pushed into the handlebars template, [Handlebars](https://handlebarsjs.com/) uses built-in helpers to display the orders on the DOM. 
+```
+
+- The Customer model has a One-To-Many association with the Order model.
+
+```
+
+// In Order Model
+Order.associate = function (models) {
+	Order.belongsTo(models.Customer, {
+		foreignKey: {
+			allowNull: false
+		}
+	});
+};
+
+// In Customer Model
+Customer.associate = function (models) {
+	Customer.hasMany(models.Order);
+};
+
+```
+
+With these associations, the app can basically get all of the restaurant's data in one api `GET` call.
+
+But to do this, the api `GET` call must include all nested associations:
+
+```
+
+app.get("/api/tables", function (req, res) {
+	db.Table.findAll({
+		include: [{ all: true, nested: true }]
+	})
+});
+
+```
+
+Here is a simplified version of the response object from the api call above:
+
+```
+Tables: [
+			{ 0: {
+					customers: [
+						{ 0: {
+							orders: [
+								{0:{order data}}
+								{ 1: {}},
+								{ 2: {}}
+							]
+						}},
+						{ 1: {}},
+						{ 2: {}}
+					]
+				}},
+			{ 1: {}},
+			{ 2: {}}
+		]
+
+```
+
+As seen above, the response object is an array of table objects, with each table object having an array of customer objects, and each of those customer objects having an array of order objects. This object is passed to [Handlebars](https://handlebarsjs.com/),which then renders the data to the DOM.
 
 ## Technologies Used
 
+
 [Node.js](https://nodejs.org/en/)
 
-* [Express](https://www.npmjs.com/package/express) 
 
-* [Express-handlebars](https://www.npmjs.com/package/express-handlebars) 
 
-* [MySQL](https://www.npmjs.com/package/mysql)
+[Express](https://expressjs.com/)
 
-* [Body-parser](https://www.npmjs.com/package/body-parser)
+
+
+[MySQL](https://www.mysql.com/)
+
+
+
+[Sequelize](https://sequelize.org/master/)
+
+
+
+[Handlebars](https://handlebarsjs.com/)
+
 
 
 HTML
 
-[Meyerweb](http://meyerweb.com/eric/tools/css/reset/) CSS reset  
+
+
+[Meyerweb](http://meyerweb.com/eric/tools/css/reset/) CSS reset
+
+
 
 Vanilla CSS
 
+
+
 JavaScript
+
+
 
 [jQuery](https://jquery.com/)
 
+
+
 [Heroku](https://heroku.com)
 
+
+
 ## Credits
+
+
 Photo by [Patrick Tomasso](https://unsplash.com/@impatrickt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/search/photos/waiter?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
 
 > Written with [StackEdit](https://stackedit.io/).

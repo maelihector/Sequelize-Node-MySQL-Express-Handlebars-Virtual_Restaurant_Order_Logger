@@ -9,7 +9,6 @@ module.exports = function(sequelize, DataTypes) {
   // Associate Table with Customer
   Table.associate = function(models){
     Table.hasMany(models.Customer);
-    Table.hasMany(models.Order);
   }
 
   return Table;
