@@ -81,22 +81,22 @@ Here is a simplified version of the response object from the api call above:
 
 ```
 Tables: [
-			{ 0: {
-					customers: [
-						{ 0: {
-							orders: [
-								{0:{order data}}
-								{ 1: {}},
-								{ 2: {}}
-							]
-						}},
-						{ 1: {}},
-						{ 2: {}}
-					]
-				}},
-			{ 1: {}},
-			{ 2: {}}
-		]
+  { 0: {
+    customers: [
+      { 0: {
+        orders: [
+          {0:{order data}}
+          { 1: {}},
+          { 2: {}}
+        ]
+      }},
+      { 1: {}},
+      { 2: {}}
+    ]
+  }},
+  { 1: {}},
+  { 2: {}}
+]
 
 ```
 
