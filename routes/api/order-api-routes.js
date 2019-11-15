@@ -11,14 +11,14 @@ module.exports = function (app) {
     db.Order.findAll({
       include: [db.Customer, db.Table]
     }).then(results => res.json(results))
-    .catch(err => res.json(err))
+    .catch(err => res.json(err));
   });
 
   // Post a new order with 'order_name'
   app.post("/api/orders", function (req, res) {
     db.Order.create(req.body)
       .then(results => res.json(results))
-      .catch(err => res.json(err))
+      .catch(err => res.json(err));
   });
 
   // Update an order's 'devoured' boolean
@@ -30,7 +30,7 @@ module.exports = function (app) {
           id: req.params.id
         }
       }).then(results => res.json(results))
-      .catch(err => res.json(err))
+      .catch(err => res.json(err));
   });
 
     // Update an order's 'paid' boolean
@@ -42,7 +42,7 @@ module.exports = function (app) {
             id: req.params.id
           }
         }).then(results => res.json(results))
-        .catch(err => res.json(err))
+        .catch(err => res.json(err));
     });
 
 };

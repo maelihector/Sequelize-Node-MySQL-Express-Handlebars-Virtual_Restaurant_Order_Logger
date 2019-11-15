@@ -13,6 +13,6 @@ module.exports = function (app) {
       .then(tables => res.render("index", {
         tables: tables
       }))
-      .catch(err => res.json(err))
+      .catch(err => res.json(err));
   });
 };

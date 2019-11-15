@@ -10,7 +10,7 @@ module.exports = function (app) {
     db.Table.findAll({
         include: [{ all: true, nested: true }]
       }).then(results => res.json(results))
-      .catch(err => res.json(err))
+      .catch(err => res.json(err));
   });
 
   // Get one table based on id
@@ -21,14 +21,14 @@ module.exports = function (app) {
           id: req.params.id
         }
       }).then(results => res.json(results))
-      .catch(err => res.json(err))
+      .catch(err => res.json(err));
   });
 
   // Add a table
   app.post("/api/tables", function(req, res){
     db.Table.create(req.body)
     .then(results => res.json(results))
-    .catch(err => res.json(err))
+    .catch(err => res.json(err));
   });
 
 };

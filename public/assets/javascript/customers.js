@@ -6,7 +6,7 @@ $(document).ready(function () {
     $.get("/api/customers")
       .then((data) => checkPaidCustomers(data))
       .then(() => filterCustomers())
-      .then(() => addDeleteBtns())
+      .then(() => addDeleteBtns());
   }
 
   // Create variables to store paid and unpaid customers
@@ -96,7 +96,7 @@ $(document).ready(function () {
     // Send upated call to api
     $.ajax("/api/customers/" + customerToUpdate, {
       type: "PUT"
-    }).then(() => location.reload())
+    }).then(() => location.reload());
   }
 
   // Call function to render customers to DOM on page load

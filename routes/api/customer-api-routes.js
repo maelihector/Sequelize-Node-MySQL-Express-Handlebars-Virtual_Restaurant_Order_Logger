@@ -10,7 +10,7 @@ module.exports = function (app) {
     db.Customer.findAll({
       include: [db.Order]
     }).then(results => res.json(results))
-    .catch(err => res.json(err))
+    .catch(err => res.json(err));
   });
 
   // Get one customer based on id
@@ -21,7 +21,7 @@ module.exports = function (app) {
         },
         include: [{ all: true, nested: true }]
       }).then(results => res.json(results))
-      .catch(err => res.json(err))
+      .catch(err => res.json(err));
   });
 
   // Add a customer
@@ -31,7 +31,7 @@ module.exports = function (app) {
         res.json(dbCustomer);
         console.log(dbCustomer);
       })
-      .catch(err => res.json(err))
+      .catch(err => res.json(err));
   });
 
   // Update leftTable to true for customer based on id
@@ -43,7 +43,7 @@ module.exports = function (app) {
           id: req.params.id
         }
       }).then(results => res.json(results))
-      .catch(err => res.json(err))
+      .catch(err => res.json(err));
   });
 
 };
