@@ -1,21 +1,12 @@
 // Make sure the DOM is fully loaded
 $(document).ready(function () {
 
-  // Function needed to load landing page
-  function getTables() {
-    $.get("/api/tables").then(data => createRestaurantTables(data));
-  }
-
-  // Load Table data as soon as page loads
-  getTables();
-
   // Function to create four tables in database
   function createRestaurantTables(data) {
 
     if (data.length < 4) {
 
       for (let i = 1; i < 5; i++) {
-        console.log(i);
         let newTable = {
           table_number: i
         }
@@ -23,9 +14,17 @@ $(document).ready(function () {
         $.ajax("/api/tables", {
           type: "POST",
           data: newTable
-        }).then(() => console.log("table inserted"))
+        })
       }
     }
   }
+
+  // Function needed to load landing page
+  function getTables() {
+    $.get("/api/tables").then(data => createRestaurantTables(data));
+  }
+
+  // Load Table data as soon as page loads
+  getTables();
 
 });

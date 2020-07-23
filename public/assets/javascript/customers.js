@@ -10,8 +10,8 @@ $(document).ready(function () {
   }
 
   // Create variables to store paid and unpaid customers
-  const paidCustomers = [];
-  const unpaidCustomers = [];
+  let paidCustomers = [];
+  let unpaidCustomers = [];
 
   // Function that checks which customers are paid up
   function checkPaidCustomers(data) {
@@ -40,7 +40,6 @@ $(document).ready(function () {
       }
     }
   }
-
 
   // Filter duplicate customer ids from both arrays (duplicates are present because each customer can have several orders)
   function filterCustomers() {

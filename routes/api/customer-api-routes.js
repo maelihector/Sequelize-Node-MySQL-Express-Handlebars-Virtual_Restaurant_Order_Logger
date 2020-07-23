@@ -29,7 +29,6 @@ module.exports = function (app) {
     db.Customer.create(req.body)
       .then(dbCustomer => {
         res.json(dbCustomer);
-        console.log(dbCustomer);
       })
       .catch(err => res.json(err));
   });

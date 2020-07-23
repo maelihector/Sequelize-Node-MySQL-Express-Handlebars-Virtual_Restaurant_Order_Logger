@@ -32,8 +32,8 @@
                   PAID
                 </button>
               </li>
-            {{else if devoured}}
-              {{> orders/paid-order-block paid=true}}
+            {{else dataValues.devoured}}
+              {{> orders/pay-order-block paid=true}}
             {{/if}}
 
         {{/each}}

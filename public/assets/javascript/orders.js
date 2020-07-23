@@ -122,7 +122,6 @@ $(document).ready(function () {
       data: newDevouredState
     }).then(
       function () {
-        console.log("changed devoured to", devoured);
         // Reload the page to get the updated list
         location.reload();
       }
